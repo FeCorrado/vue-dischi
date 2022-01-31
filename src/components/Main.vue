@@ -1,13 +1,15 @@
  <template>
-    <div class="boxbb">
-        <Card
-         v-for="(disco, index) in dischi" 
-         :key="index" class="card"
-         :immagine="disco.poster"
-         :titolo="disco.title"
-         :autore="disco.author"
-         :anno="disco.year"
-        />
+    <div class="big">
+        <div class="boxbb">
+            <Card
+            v-for="(disco, index) in dischi" 
+            :key="index" class="card"
+            :immagine="disco.poster"
+            :titolo="disco.title"
+            :autore="disco.author"
+            :anno="disco.year"
+            />
+        </div>
     </div>
 </template>
 

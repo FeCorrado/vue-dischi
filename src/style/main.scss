@@ -1,0 +1,27 @@
+.boxbb{
+    margin: auto;
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-bottom: 150px;
+    .card{
+        margin-top: 25px;
+        width: calc(90% / 5);
+        background-color: rgb(57, 62, 62);
+        img{
+            width: 150px;
+            margin-top: 10px;
+        }
+        h3{
+            color: white;
+        }
+        h5{
+            color: rgb(157, 156, 156);
+        }
+    }
+}
+
+.big{
+    background-color: rgb(28, 31, 43);
+}
