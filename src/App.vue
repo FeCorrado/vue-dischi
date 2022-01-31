@@ -1,33 +1,36 @@
 <template>
   <div id="app">
-    <Head/>
-    <Main :dischi="dischi"/>
+    <Head />
+    <Main :dischi="dischi" :loading="loading" />
   </div>
 </template>
 
 <script>
-import axios from 'axios'
-import Main from './components/Main.vue'
-import Head from './components/Header.vue'
+import axios from "axios";
+import Main from "./components/Main.vue";
+import Head from "./components/Header.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Main,
     Head,
   },
   data() {
-    return{
-      dischi: []
-    }
+    return {
+      dischi: [],
+      loading: true,
+    };
   },
-    mounted() {
-        axios.get('https://flynn.boolean.careers/exercises/api/array/music').then((response)=>{
-          this.dischi = response.data.response
-        })
-}
-}
-
+  mounted() {
+    axios
+      .get("https://flynn.boolean.careers/exercises/api/array/music")
+      .then((response) => {
+        this.dischi = response.data.response;
+        this.loading = false;
+      });
+  },
+};
 </script>
 
 <style lang="scss">
@@ -37,6 +40,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
