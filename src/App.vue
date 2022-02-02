@@ -1,24 +1,29 @@
 <template>
   <div id="app">
     <Head />
-    <Main :dischi="dischi" :loading="loading" />
+    <SearchBar @select="filterResult" :generi="generi" />
+    <Main :dischi="dischiFiltrati" :loading="loading" />
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import Main from "./components/Main.vue";
 import Head from "./components/Header.vue";
+import SearchBar from "./components/SearchBar.vue";
+import Main from "./components/Main.vue";
 
 export default {
   name: "App",
   components: {
     Main,
     Head,
+    SearchBar,
   },
   data() {
     return {
       dischi: [],
+      dischiFiltrati: [],
+      generi: [],
       loading: true,
     };
   },
@@ -27,18 +32,38 @@ export default {
       .get("https://flynn.boolean.careers/exercises/api/array/music")
       .then((response) => {
         this.dischi = response.data.response;
-        this.loading = false;
+        this.dischiFiltrati = response.data.response;
+        this.filtereGenere(this.dischi);
+        this.loading = false; //
       });
+  },
+  methods: {
+    filtereGenere(dischi) {
+      for (let i = 0; i < dischi.length; i++) {
+        if (!this.generi.includes(dischi[i].genre)) {
+          this.generi.push(dischi[i].genre);
+        }
+      }
+    },
+
+    filterResult(keywordSearch) {
+      console.log(keywordSearch);
+      this.dischiFiltrati = this.dischi.filter((disco) => {
+        if (keywordSearch === "all") {
+          return disco.genre.includes("");
+          //return bottone;
+        } else {
+          return disco.genre === keywordSearch;
+        }
+      });
+      //filterResult(keyword) {
+      //  this.dischiFiltrati = this.dischi.filter((disco) => {
+      //    return disco.genre.toLowerCase().includes(keyword);
+      //  });
+      //},
+    },
   },
 };
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-</style>
+<style lang="scss"></style>
